@@ -8,4 +8,6 @@ import { Component } from '@angular/core';
 })
 export class Home {
 
+nome = "123 teste";
+
 }
