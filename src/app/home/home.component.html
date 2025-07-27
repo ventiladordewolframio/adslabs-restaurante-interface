@@ -1,2 +1,23 @@
-<p>home works!</p>
-<p>{{ nome }}</p>
+<h1>Clients List</h1>
+<button (click)="onFetchData()">Fetch Active Client Data</button>
+
+<!-- Loading indicator -->
+<div *ngIf="loading">Loading...</div>
+
+<!-- If there is data, display it, else show 'No Data' message -->
+<div *ngIf="clients && clients.length > 0; else noData">
+    <div *ngFor="let client of clients">
+        <div class="client-card">
+            <p><strong>ID:</strong> {{ client.id }}</p>
+            <p><strong>Name:</strong> {{ client.name }}</p>
+            <p><strong>CPF:</strong> {{ client.cpf }}</p>
+            <p><strong>CreatedAt:</strong> {{ client.createdAt }}</p>
+            <p><strong>UpdatedAt:</strong> {{ client.updatedAt }}</p>
+        </div>
+    </div>
+</div>
+
+<!-- Template for when no data is found -->
+<ng-template #noData>
+    <div>No clients found.</div>
+</ng-template>
