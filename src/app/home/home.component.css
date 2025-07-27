@@ -1,29 +1,38 @@
-.client-card {
-    border: 1px solid #302f2f;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 5px;
-    background-color: #383838;
+table {
+    width: 100%;
+    /* Optional: makes the table fill its container */
+    table-layout: auto;
+    /* Automatically adjust columns to fit content */
+    border-collapse: collapse;
+    /* Optional: makes the borders collapse into one */
 }
+
+th,
+td {
+    padding: 8px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
 
 /* Main Container for the Table */
 .clients-table {
     width: 100%;
     max-width: 1200px;
-    /* Optional: Max width of the table */
     margin: 0 auto;
     padding: 20px;
     border-collapse: collapse;
+    background-color: #27283B;
 }
 
 /* Table Header */
 .clients-header {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: 150px 1fr 1fr 1fr 1fr 1fr;
     padding: 10px 0;
-    background-color: #1f2030;
+    background-color: #1d1e2e;
     font-weight: bold;
-    border-bottom: 2px solid #252525;
+    border-bottom: 2px solid #ccc;
 }
 
 .header-item {
@@ -40,10 +49,10 @@
 /* Table Rows */
 .clients-row {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: 150px 1fr 1fr 1fr 1fr 1fr;
     padding: 10px 0;
-    border-bottom: 1px solid #ddd;
-    background-color: #27283B;
+    border-bottom: 1px solid #27283B;
+    ;
 }
 
 .row-item {
@@ -57,9 +66,31 @@
     border-right: none;
 }
 
-/* Responsive Design: Stack rows into columns on small screens */
+/* Styling for Action Buttons */
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.action-buttons button {
+    padding: 5px 10px;
+    font-size: 14px;
+    background-color: #3BA170;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.action-buttons button:hover {
+    background-color: #45a049;
+}
+
 @media (max-width: 768px) {
 
+    /* On smaller screens, stack the grid columns */
     .clients-header,
     .clients-row {
         grid-template-columns: 1fr;
@@ -74,13 +105,13 @@
         /* Add bottom border to separate items */
     }
 
-    /* Add spacing between rows */
-    .row-item {
-        padding-top: 10px;
+    /* Adjust Action Buttons for mobile */
+    .action-buttons {
+        flex-direction: column;
+        gap: 5px;
     }
 
-    .header-item {
-        font-weight: bold;
-        padding-top: 10px;
+    .action-buttons button {
+        width: 100%;
     }
 }

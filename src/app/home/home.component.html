@@ -4,10 +4,10 @@
 <!-- Loading indicator -->
 <div *ngIf="loading">Loading...</div>
 
-<!-- If there is data, display it, else show 'No Data' message -->
 <!-- Table Container -->
 <div *ngIf="clients && clients.length > 0; else noData" class="clients-table">
     <div class="clients-header">
+        <div class="header-item">Actions</div> <!-- New Header for buttons -->
         <div class="header-item">ID</div>
         <div class="header-item">Name</div>
         <div class="header-item">CPF</div>
@@ -17,7 +17,12 @@
 
     <!-- Table Rows: Each client is displayed as a row -->
     <div *ngFor="let client of clients" class="clients-row">
-        <button (click)="onFetchData()">Edit</button>
+        <!-- Action Buttons to the left of each row -->
+        <div class="action-buttons">
+            <button (click)="onFetchData()">View</button>
+            <button (click)="onFetchData()">Edit</button>
+        </div>
+
         <div class="row-item">{{ client.id }}</div>
         <div class="row-item">{{ client.name }}</div>
         <div class="row-item">{{ client.cpf }}</div>
