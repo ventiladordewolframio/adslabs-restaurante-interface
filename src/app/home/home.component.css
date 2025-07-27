@@ -1,20 +1,3 @@
-table {
-    width: 100%;
-    /* Optional: makes the table fill its container */
-    table-layout: auto;
-    /* Automatically adjust columns to fit content */
-    border-collapse: collapse;
-    /* Optional: makes the borders collapse into one */
-}
-
-th,
-td {
-    padding: 8px;
-    text-align: left;
-    border: 1px solid #ddd;
-}
-
-
 /* Main Container for the Table */
 .clients-table {
     width: 100%;
@@ -25,7 +8,6 @@ td {
     background-color: #27283B;
 }
 
-/* Table Header */
 .clients-header {
     display: grid;
     grid-template-columns: 150px 1fr 1fr 1fr 1fr 1fr;
@@ -46,7 +28,6 @@ td {
     border-right: none;
 }
 
-/* Table Rows */
 .clients-row {
     display: grid;
     grid-template-columns: 150px 1fr 1fr 1fr 1fr 1fr;
@@ -102,7 +83,6 @@ td {
         padding-left: 10px;
         border-right: none;
         border-bottom: 1px solid #ddd;
-        /* Add bottom border to separate items */
     }
 
     /* Adjust Action Buttons for mobile */
@@ -113,5 +93,76 @@ td {
 
     .action-buttons button {
         width: 100%;
+    }
+}
+
+/* single client*/
+
+/* Styling for the client container */
+.client-container {
+    width: 80%;
+    max-width: 600px;
+    margin: 0 auto;
+    /* Center the container */
+    padding: 20px;
+    background-color: #27283B;
+    /* Lighter background color */
+    border-radius: 8px;
+    /* Rounded corners for the container */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow for depth */
+    text-align: center;
+    /* Center align the text */
+}
+
+/* Styling for the action buttons */
+.action-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.action-buttons button {
+    padding: 8px 20px;
+    font-size: 14px;
+    background-color: #4CAF50;
+    /* Green background */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.action-buttons button:hover {
+    background-color: #45a049;
+    /* Darker green on hover */
+}
+
+.action-buttons button:focus {
+    outline: none;
+}
+
+/* Loading indicator styling */
+.loading {
+    text-align: center;
+    font-size: 16px;
+    color: #777;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .client-container {
+        width: 90%;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .action-buttons button {
+        width: 100%;
+        /* Make buttons full-width on smaller screens */
     }
 }

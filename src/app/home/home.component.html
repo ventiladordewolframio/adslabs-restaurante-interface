@@ -1,5 +1,34 @@
 <h1>Clients List</h1>
-<button (click)="onFetchData()">Fetch Active Client Data</button>
+
+<!-- Input for Client ID -->
+<div>
+  <label for="clientId">Enter Client ID:</label>
+  <input type="number" [(ngModel)]="clientId" id="clientId" placeholder="Enter client ID" />
+</div>
+
+<button (click)="fetchSingleClientData(clientId)">Fetch Single Client</button>
+
+
+<!-- Display the client data when fetched -->
+<div *ngIf="client" class="client-container">
+    <h3>Client Details</h3>
+    <p><strong>ID:</strong> {{ client.id }}</p>
+    <p><strong>Name:</strong> {{ client.name }}</p>
+    <p><strong>CPF:</strong> {{ client.cpf }}</p>
+    <p><strong>Created At:</strong> {{ client.createdAt }}</p>
+    <p><strong>Updated At:</strong> {{ client.updatedAt }}</p>
+
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+        <button (click)="test(client.id)">Edit</button>
+        <button (click)="test(client.id)">Delete</button>
+    </div>
+</div>
+
+<!-- Loading indicator (optional) -->
+<div *ngIf="loading">Loading...</div>
+
+<button (click)="fetchAllClientData()">Fetch All Clients</button>
 
 <!-- Loading indicator -->
 <div *ngIf="loading">Loading...</div>
@@ -7,7 +36,7 @@
 <!-- Table Container -->
 <div *ngIf="clients && clients.length > 0; else noData" class="clients-table">
     <div class="clients-header">
-        <div class="header-item">Actions</div> <!-- New Header for buttons -->
+        <div class="header-item">Actions</div>
         <div class="header-item">ID</div>
         <div class="header-item">Name</div>
         <div class="header-item">CPF</div>
@@ -17,10 +46,9 @@
 
     <!-- Table Rows: Each client is displayed as a row -->
     <div *ngFor="let client of clients" class="clients-row">
-        <!-- Action Buttons to the left of each row -->
         <div class="action-buttons">
-            <button (click)="onFetchData()">View</button>
-            <button (click)="onFetchData()">Edit</button>
+            <button (click)="test(client.id)">Delete</button>
+            <button (click)="test(client.id)">Edit</button>
         </div>
 
         <div class="row-item">{{ client.id }}</div>
