@@ -5,15 +5,24 @@
 <div *ngIf="loading">Loading...</div>
 
 <!-- If there is data, display it, else show 'No Data' message -->
-<div *ngIf="clients && clients.length > 0; else noData">
-    <div *ngFor="let client of clients">
-        <div class="client-card">
-            <p><strong>ID:</strong> {{ client.id }}</p>
-            <p><strong>Name:</strong> {{ client.name }}</p>
-            <p><strong>CPF:</strong> {{ client.cpf }}</p>
-            <p><strong>CreatedAt:</strong> {{ client.createdAt }}</p>
-            <p><strong>UpdatedAt:</strong> {{ client.updatedAt }}</p>
-        </div>
+<!-- Table Container -->
+<div *ngIf="clients && clients.length > 0; else noData" class="clients-table">
+    <div class="clients-header">
+        <div class="header-item">ID</div>
+        <div class="header-item">Name</div>
+        <div class="header-item">CPF</div>
+        <div class="header-item">Created At</div>
+        <div class="header-item">Updated At</div>
+    </div>
+
+    <!-- Table Rows: Each client is displayed as a row -->
+    <div *ngFor="let client of clients" class="clients-row">
+        <button (click)="onFetchData()">Edit</button>
+        <div class="row-item">{{ client.id }}</div>
+        <div class="row-item">{{ client.name }}</div>
+        <div class="row-item">{{ client.cpf }}</div>
+        <div class="row-item">{{ client.createdAt }}</div>
+        <div class="row-item">{{ client.updatedAt }}</div>
     </div>
 </div>
 
