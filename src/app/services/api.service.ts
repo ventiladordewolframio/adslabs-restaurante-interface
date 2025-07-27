@@ -41,4 +41,27 @@ export class ApiService {
     return this.http.post<any>(url, clientData);
   }
 
+  //* ITEM
+
+  getAllItemData(): Observable<any> {
+    const url = `${this.apiUrl}item`;
+    return this.http.get<any>(url);
+  }
+  getSingleItemData(id: number): Observable<any> {
+    const url = `${this.apiUrl}item/${id}`;
+    return this.http.get<any>(url);
+  }
+  delSingleItemData(id: number): Observable<any> {
+    const url = `${this.apiUrl}item/${id}`;
+    return this.http.delete<any>(url);
+  }
+  putSingleItemData(id: number, itemData: any): Observable<any> {
+    const url = `${this.apiUrl}item/${id}`;
+    return this.http.put<any>(url, itemData);
+  }
+  postSingleItemData(itemData: any): Observable<any> {
+    const url = `${this.apiUrl}item`;
+    return this.http.post<any>(url, itemData);
+  }
+
 }

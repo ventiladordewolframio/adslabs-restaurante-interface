@@ -20,7 +20,7 @@
 <button (click)="createSingleClientData()">Create Client</button>
 
 <!-- Display the client data when fetched -->
-<div *ngIf="client" class="client-container">
+<div *ngIf="client" class="container">
     <h3>Client Details</h3>
     <p><strong>ID:</strong> {{ client.id }}</p>
     <p><strong>Name:</strong> {{ client.name }}</p>
@@ -46,8 +46,8 @@
 <div *ngIf="loading">Loading...</div>
 
 <!-- Table Container -->
-<div *ngIf="clients && clients.length > 0; else noData" class="clients-table">
-    <div class="clients-header">
+<div *ngIf="clients && clients.length > 0; else noData" class="table">
+    <div class="header">
         <div class="header-item">Actions</div>
         <div class="header-item">ID</div>
         <div class="header-item">Name</div>
@@ -59,10 +59,10 @@
     </div>
 
     <!-- Table Rows: Each client is displayed as a row -->
-    <div *ngFor="let client of clients" class="clients-row">
+    <div *ngFor="let client of clients" class="row">
         <div class="action-buttons">
             <button (click)="deleteSingleClientData(client.id)">Delete</button>
-            <button (click)="loadVariables(client.id, client.id, client.name, client.cpf)">Load</button>
+            <button (click)="loadClientVariables(client.id, client.id, client.name, client.cpf)">Load</button>
         </div>
 
         <div class="row-item">{{ client.id || client.client.id }}</div>
@@ -81,3 +81,78 @@
 </ng-template>
 
 <h1>Items List</h1>
+
+<!-- Input for Client ID -->
+<div>
+    <label for="itemId">Enter item ID:</label>
+    <input type="number" [(ngModel)]="itemId" id="itemId" placeholder="Enter item ID" />
+</div>
+<!-- Modal Content (two fields for editing) -->
+<div class="input-field" *ngIf="item">
+    <label for="name">Edit Name:</label>
+    <input type="text" [(ngModel)]="item.name" id="name" />
+</div>
+
+<div class="input-field" *ngIf="item">
+    <label for="price">Edit Price:</label>
+    <input type="text" [(ngModel)]="item.price" id="price" />
+</div>
+
+<button (click)="fetchSingleItemData(itemId)">Fetch Single item</button>
+<button (click)="createSingleItemData()">Create item</button>
+
+<!-- Display the item data when fetched -->
+<div *ngIf="item" class="container">
+    <h3>item Details</h3>
+    <p><strong>ID:</strong> {{ item.id }}</p>
+    <p><strong>Name:</strong> {{ item.name }}</p>
+    <p><strong>Price:</strong> {{ item.price }}</p>
+    <p><strong>Created At:</strong> {{ item.createdAt }}</p>
+    <p><strong>Updated At:</strong> {{ item.updatedAt }}</p>
+
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+        <button (click)="editSingleItemData(itemId)">Save</button>
+        <button (click)="deleteSingleItemData(itemId)">Delete</button>
+    </div>
+</div>
+
+<!-- Loading indicator (optional) -->
+<div *ngIf="loading">Loading...</div>
+
+
+<button (click)="fetchAllItemData()">Fetch All Items</button>
+
+<!-- Loading indicator -->
+<div *ngIf="loading">Loading...</div>
+
+<!-- Table Container -->
+<div *ngIf="items && items.length > 0; else noData" class="table">
+    <div class="header">
+        <div class="header-item">Actions</div>
+        <div class="header-item">ID</div>
+        <div class="header-item">Name</div>
+        <div class="header-item">Price</div>
+        <div class="header-item">Created At</div>
+        <div class="header-item">Updated At</div>
+    </div>
+
+    <!-- Table Rows: Each client is displayed as a row -->
+    <div *ngFor="let item of items" class="row">
+        <div class="action-buttons">
+            <button (click)="deleteSingleItemData(item.id)">Delete</button>
+            <button (click)="loadItemVariables(item.id, item.id, item.name, item.price)">Load</button>
+        </div>
+
+        <div class="row-item">{{ item.id || item.item.id }}</div>
+        <div class="row-item">{{ item.name || item.item.name }}</div>
+        <div class="row-item">{{ item.price || item.item.price }}</div>
+        <div class="row-item">{{ item.createdAt | date:'medium' }}</div>
+        <div class="row-item">{{ item.updatedAt | date:'medium' }}</div>
+    </div>
+</div>
+
+<!-- Template for when no data is found -->
+<ng-template #noData>
+    <div>No items found.</div>
+</ng-template>

@@ -1,5 +1,5 @@
 /* Main Container for the Clients Div */
-.clients-table {
+.table {
     width: 100%;
     max-width: 95%;
     margin: 0 auto;
@@ -7,7 +7,7 @@
     background-color: #27283B;
 }
 
-.clients-header {
+.header {
     display: grid;
     grid-template-columns: 120px 1fr 2fr 2fr 1fr 1fr 1fr 1fr;
     padding: 8px 0;
@@ -28,7 +28,7 @@
 }
 
 /* Table Rows (divs) */
-.clients-row {
+.row {
     display: grid;
     grid-template-columns: 120px 1fr 2fr 2fr 1fr 1fr 1fr 1fr;
     padding: 8px 0;
@@ -68,8 +68,8 @@
 
 @media (max-width: 768px) {
 
-    .clients-header,
-    .clients-row {
+    .header,
+    .row {
         grid-template-columns: 1fr;
     }
 
@@ -95,7 +95,7 @@
 /* single client */
 
 
-.client-container {
+.container {
     width: 100%;
     max-width: 500px;
     margin: 0 auto;
