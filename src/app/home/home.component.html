@@ -2,12 +2,22 @@
 
 <!-- Input for Client ID -->
 <div>
-  <label for="clientId">Enter Client ID:</label>
-  <input type="number" [(ngModel)]="clientId" id="clientId" placeholder="Enter client ID" />
+    <label for="clientId">Enter Client ID:</label>
+    <input type="number" [(ngModel)]="clientId" id="clientId" placeholder="Enter client ID" />
+</div>
+<!-- Modal Content (two fields for editing) -->
+<div class="input-field" *ngIf="client">
+    <label for="name">Edit Name:</label>
+    <input type="text" [(ngModel)]="client.name" id="name" />
+</div>
+
+<div class="input-field" *ngIf="client">
+    <label for="cpf">Edit CPF:</label>
+    <input type="text" [(ngModel)]="client.cpf" id="cpf" />
 </div>
 
 <button (click)="fetchSingleClientData(clientId)">Fetch Single Client</button>
-
+<button (click)="createSingleClientData()">Create Client</button>
 
 <!-- Display the client data when fetched -->
 <div *ngIf="client" class="client-container">
@@ -20,8 +30,8 @@
 
     <!-- Action Buttons -->
     <div class="action-buttons">
-        <button (click)="test(client.id)">Edit</button>
-        <button (click)="test(client.id)">Delete</button>
+        <button (click)="editSingleClientData(clientId)">Save</button>
+        <button (click)="deleteSingleClientData(clientId)">Delete</button>
     </div>
 </div>
 
@@ -29,6 +39,8 @@
 <div *ngIf="loading">Loading...</div>
 
 <button (click)="fetchAllClientData()">Fetch All Clients</button>
+<button (click)="fetchTop5ClientsByOrder()"> Fetch Top 5 Clients By Order</button>
+<button (click)="fetchTop5ClientsByTotalSpent()">Fetch Top 5 Clients By Total Spent</button>
 
 <!-- Loading indicator -->
 <div *ngIf="loading">Loading...</div>
@@ -40,6 +52,8 @@
         <div class="header-item">ID</div>
         <div class="header-item">Name</div>
         <div class="header-item">CPF</div>
+        <div class="header-item">Total Spent</div>
+        <div class="header-item">Total Quantity</div>
         <div class="header-item">Created At</div>
         <div class="header-item">Updated At</div>
     </div>
@@ -47,15 +61,17 @@
     <!-- Table Rows: Each client is displayed as a row -->
     <div *ngFor="let client of clients" class="clients-row">
         <div class="action-buttons">
-            <button (click)="test(client.id)">Delete</button>
-            <button (click)="test(client.id)">Edit</button>
+            <button (click)="deleteSingleClientData(client.id)">Delete</button>
+            <button (click)="loadVariables(client.id, client.id, client.name, client.cpf)">Load</button>
         </div>
 
-        <div class="row-item">{{ client.id }}</div>
-        <div class="row-item">{{ client.name }}</div>
-        <div class="row-item">{{ client.cpf }}</div>
-        <div class="row-item">{{ client.createdAt }}</div>
-        <div class="row-item">{{ client.updatedAt }}</div>
+        <div class="row-item">{{ client.id || client.client.id }}</div>
+        <div class="row-item">{{ client.name || client.client.name }}</div>
+        <div class="row-item">{{ client.cpf || client.client.cpf }}</div>
+        <div class="row-item">{{ client.totalSpent }}</div>
+        <div class="row-item">{{ client.totalQuantity }}</div>
+        <div class="row-item">{{ client.createdAt | date:'medium' }}</div>
+        <div class="row-item">{{ client.updatedAt | date:'medium' }}</div>
     </div>
 </div>
 
@@ -63,3 +79,5 @@
 <ng-template #noData>
     <div>No clients found.</div>
 </ng-template>
+
+<h1>Items List</h1>

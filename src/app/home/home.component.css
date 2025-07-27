@@ -1,17 +1,16 @@
-/* Main Container for the Table */
+/* Main Container for the Clients Div */
 .clients-table {
     width: 100%;
-    max-width: 1200px;
+    max-width: 95%;
     margin: 0 auto;
-    padding: 20px;
-    border-collapse: collapse;
+    padding: 10px;
     background-color: #27283B;
 }
 
 .clients-header {
     display: grid;
-    grid-template-columns: 150px 1fr 1fr 1fr 1fr 1fr;
-    padding: 10px 0;
+    grid-template-columns: 120px 1fr 2fr 2fr 1fr 1fr 1fr 1fr;
+    padding: 8px 0;
     background-color: #1d1e2e;
     font-weight: bold;
     border-bottom: 2px solid #ccc;
@@ -19,7 +18,7 @@
 
 .header-item {
     text-align: center;
-    padding: 8px;
+    padding: 6px;
     border-right: 1px solid #ddd;
 }
 
@@ -28,36 +27,34 @@
     border-right: none;
 }
 
+/* Table Rows (divs) */
 .clients-row {
     display: grid;
-    grid-template-columns: 150px 1fr 1fr 1fr 1fr 1fr;
-    padding: 10px 0;
+    grid-template-columns: 120px 1fr 2fr 2fr 1fr 1fr 1fr 1fr;
+    padding: 8px 0;
     border-bottom: 1px solid #27283B;
-    ;
 }
 
 .row-item {
     text-align: center;
-    padding: 8px;
+    padding: 6px;
     border-right: 1px solid #ddd;
 }
 
-/* Remove right border for the last column in each row */
 .row-item:last-child {
     border-right: none;
 }
 
-/* Styling for Action Buttons */
 .action-buttons {
     display: flex;
-    gap: 10px;
+    gap: 8px;
     justify-content: center;
     align-items: center;
 }
 
 .action-buttons button {
-    padding: 5px 10px;
-    font-size: 14px;
+    padding: 6px 12px;
+    font-size: 12px;
     background-color: #3BA170;
     color: white;
     border: none;
@@ -71,7 +68,6 @@
 
 @media (max-width: 768px) {
 
-    /* On smaller screens, stack the grid columns */
     .clients-header,
     .clients-row {
         grid-template-columns: 1fr;
@@ -85,7 +81,7 @@
         border-bottom: 1px solid #ddd;
     }
 
-    /* Adjust Action Buttons for mobile */
+
     .action-buttons {
         flex-direction: column;
         gap: 5px;
@@ -96,38 +92,32 @@
     }
 }
 
-/* single client*/
+/* single client */
 
-/* Styling for the client container */
+
 .client-container {
-    width: 80%;
-    max-width: 600px;
+    width: 100%;
+    max-width: 500px;
     margin: 0 auto;
-    /* Center the container */
-    padding: 20px;
+    padding: 15px;
     background-color: #27283B;
-    /* Lighter background color */
     border-radius: 8px;
-    /* Rounded corners for the container */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    /* Subtle shadow for depth */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
-    /* Center align the text */
 }
 
-/* Styling for the action buttons */
+
 .action-buttons {
-    margin-top: 20px;
+    margin-top: 15px;
     display: flex;
     justify-content: center;
-    gap: 15px;
+    gap: 12px;
 }
 
 .action-buttons button {
-    padding: 8px 20px;
+    padding: 6px 15px;
     font-size: 14px;
     background-color: #4CAF50;
-    /* Green background */
     color: white;
     border: none;
     border-radius: 5px;
@@ -136,21 +126,20 @@
 
 .action-buttons button:hover {
     background-color: #45a049;
-    /* Darker green on hover */
 }
 
 .action-buttons button:focus {
     outline: none;
 }
 
-/* Loading indicator styling */
+
 .loading {
     text-align: center;
     font-size: 16px;
     color: #777;
 }
 
-/* Mobile Responsiveness */
+
 @media (max-width: 768px) {
     .client-container {
         width: 90%;
@@ -163,6 +152,5 @@
 
     .action-buttons button {
         width: 100%;
-        /* Make buttons full-width on smaller screens */
     }
 }
