@@ -122,6 +122,7 @@
 
 
 <button (click)="fetchAllItemData()">Fetch All Items</button>
+<button (click)="fetchTopItemsByAmountOrdered()">Fetch Top Items</button>
 
 <!-- Loading indicator -->
 <div *ngIf="loading">Loading...</div>
@@ -133,6 +134,7 @@
         <div class="header-item">ID</div>
         <div class="header-item">Name</div>
         <div class="header-item">Price</div>
+        <div class="header-item">Total Quantity</div>
         <div class="header-item">Created At</div>
         <div class="header-item">Updated At</div>
     </div>
@@ -147,6 +149,7 @@
         <div class="row-item">{{ item.id || item.item.id }}</div>
         <div class="row-item">{{ item.name || item.item.name }}</div>
         <div class="row-item">{{ item.price || item.item.price }}</div>
+        <div class="row-item">{{ item.totalQuantity }}</div>
         <div class="row-item">{{ item.createdAt | date:'medium' }}</div>
         <div class="row-item">{{ item.updatedAt | date:'medium' }}</div>
     </div>

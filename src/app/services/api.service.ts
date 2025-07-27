@@ -63,5 +63,9 @@ export class ApiService {
     const url = `${this.apiUrl}item`;
     return this.http.post<any>(url, itemData);
   }
+  getTopItemsByAmountOrdered(): Observable<any> {
+    const url = `${this.apiUrl}item/top`;
+    return this.http.get<any>(url);
+  }
 
 }

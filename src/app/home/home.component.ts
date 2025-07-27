@@ -195,7 +195,7 @@ export class HomeComponent {
     this.client.cpf = cpf
   }
 
-    loadItemVariables(itemid: number, id: number, name: string, price: string) {
+  loadItemVariables(itemid: number, id: number, name: string, price: string) {
     this.itemId = itemid
     this.item.id = id
     this.item.name = name
@@ -316,6 +316,27 @@ export class HomeComponent {
           this.item = [];
         }
         console.log('API Response ITEM:', this.item);
+        this.loading = false;
+      },
+      (error) => {
+        console.error('Error fetching data:', error);
+        this.loading = false;
+      }
+    );
+  }
+
+  fetchTopItemsByAmountOrdered() {
+    this.loading = true;
+    this.apiService.getTopItemsByAmountOrdered().subscribe(
+      (response: any) => {
+        console.log('API Response:', response);
+        if (response && response.dados && Array.isArray(response.dados)) {
+          this.items = response.dados;
+        } else {
+          console.warn('No valid item data found in response.');
+          this.items = [];
+        }
+        console.log('API Response ITEMS:', this.items)
         this.loading = false;
       },
       (error) => {
