@@ -1,32 +1,41 @@
 <h1>Clients List</h1>
 
 <!-- Input for Client ID -->
-<div>
-    <label for="clientId">Enter Client ID:</label>
-    <input type="number" [(ngModel)]="clientId" id="clientId" placeholder="Enter client ID" />
-</div>
-<!-- Modal Content (two fields for editing) -->
-<div class="input-field" *ngIf="client">
-    <label for="name">Edit Name:</label>
-    <input type="text" [(ngModel)]="client.name" id="name" />
+<div class="input-container">
+    <div class="input-field">
+        <label for="clientId">Enter Client ID:</label>
+        <input type="number" [(ngModel)]="clientId" id="clientId" placeholder="Enter client ID" />
+    </div>
 </div>
 
-<div class="input-field" *ngIf="client">
-    <label for="cpf">Edit CPF:</label>
-    <input type="text" [(ngModel)]="client.cpf" id="cpf" />
+<div class="api-buttons">
+    <button (click)="fetchSingleClientData(clientId)">Fetch Single Client</button>
 </div>
 
-<button (click)="fetchSingleClientData(clientId)">Fetch Single Client</button>
-<button (click)="createSingleClientData()">Create Client</button>
+<div class="input-container">
+    <div class="input-field" *ngIf="client">
+        <label for="name">Edit Name:</label>
+        <input type="text" [(ngModel)]="client.name" id="name" />
+    </div>
+
+    <div class="input-field" *ngIf="client">
+        <label for="cpf">Edit CPF:</label>
+        <input type="text" [(ngModel)]="client.cpf" id="cpf" />
+    </div>
+</div>
+
+<div class="api-buttons">
+    <button (click)="createSingleClientData()">Create Client</button>
+</div>
 
 <!-- Display the client data when fetched -->
 <div *ngIf="client" class="container">
-    <h3>Client Details</h3>
+    <h2>Client Details</h2>
     <p><strong>ID:</strong> {{ client.id }}</p>
     <p><strong>Name:</strong> {{ client.name }}</p>
     <p><strong>CPF:</strong> {{ client.cpf }}</p>
-    <p><strong>Created At:</strong> {{ client.createdAt }}</p>
-    <p><strong>Updated At:</strong> {{ client.updatedAt }}</p>
+    <p><strong>Created At:</strong> {{ clientCreatedTimestamp | date:'medium' }}</p>
+    <p><strong>Updated At:</strong> {{ clientUpdatedTimestamp | date:'medium' }}</p>
 
     <!-- Action Buttons -->
     <div class="action-buttons">
@@ -38,9 +47,17 @@
 <!-- Loading indicator (optional) -->
 <div *ngIf="loading">Loading...</div>
 
-<button (click)="fetchAllClientData()">Fetch All Clients</button>
-<button (click)="fetchTop5ClientsByOrder()"> Fetch Top 5 Clients By Order</button>
-<button (click)="fetchTop5ClientsByTotalSpent()">Fetch Top 5 Clients By Total Spent</button>
+<div class="api-buttons">
+    <button (click)="fetchAllClientData()">Fetch All Clients</button>
+</div>
+
+<div class="api-buttons">
+    <button (click)="fetchTop5ClientsByOrder()"> Fetch Top 5 Clients By Order</button>
+</div>
+
+<div class="api-buttons">
+    <button (click)="fetchTop5ClientsByTotalSpent()">Fetch Top 5 Clients By Total Spent</button>
+</div>
 
 <!-- Loading indicator -->
 <div *ngIf="loading">Loading...</div>
@@ -62,7 +79,8 @@
     <div *ngFor="let client of clients" class="row">
         <div class="action-buttons">
             <button (click)="deleteSingleClientData(client.id)">Delete</button>
-            <button (click)="loadClientVariables(client.id, client.id, client.name, client.cpf)">Load</button>
+            <button
+                (click)="loadClientVariables(client.id, client.id, client.name, client.cpf, client.createdAt, client.updatedAt)">Load</button>
         </div>
 
         <div class="row-item">{{ client.id || client.client.id }}</div>
@@ -80,35 +98,46 @@
     <div>No clients found.</div>
 </ng-template>
 
+<!---------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <h1>Items List</h1>
+<!---------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
 <!-- Input for Client ID -->
-<div>
-    <label for="itemId">Enter item ID:</label>
-    <input type="number" [(ngModel)]="itemId" id="itemId" placeholder="Enter item ID" />
-</div>
-<!-- Modal Content (two fields for editing) -->
-<div class="input-field" *ngIf="item">
-    <label for="name">Edit Name:</label>
-    <input type="text" [(ngModel)]="item.name" id="name" />
+<div class="input-container">
+    <div class="input-field">
+        <label for="itemId">Enter item ID:</label>
+        <input type="number" [(ngModel)]="itemId" id="itemId" placeholder="Enter item ID" />
+    </div>
 </div>
 
-<div class="input-field" *ngIf="item">
-    <label for="price">Edit Price:</label>
-    <input type="text" [(ngModel)]="item.price" id="price" />
+<div class="api-buttons">
+    <button (click)="fetchSingleItemData(itemId)">Fetch Single item</button>
 </div>
 
-<button (click)="fetchSingleItemData(itemId)">Fetch Single item</button>
-<button (click)="createSingleItemData()">Create item</button>
+<div class="input-container">
+    <div class="input-field" *ngIf="item">
+        <label for="name">Edit Name:</label>
+        <input type="text" [(ngModel)]="item.name" id="name" />
+    </div>
+
+    <div class="input-field" *ngIf="item">
+        <label for="price">Edit Price:</label>
+        <input type="number" [(ngModel)]="item.price" id="price" />
+    </div>
+</div>
+
+<div class="api-buttons">
+    <button (click)="createSingleItemData()">Create item</button>
+</div>
 
 <!-- Display the item data when fetched -->
 <div *ngIf="item" class="container">
-    <h3>item Details</h3>
+    <h2>Item Details</h2>
     <p><strong>ID:</strong> {{ item.id }}</p>
     <p><strong>Name:</strong> {{ item.name }}</p>
     <p><strong>Price:</strong> {{ item.price }}</p>
-    <p><strong>Created At:</strong> {{ item.createdAt }}</p>
-    <p><strong>Updated At:</strong> {{ item.updatedAt }}</p>
+    <p><strong>Created At:</strong> {{ itemCreatedTimestamp | date:'medium' }}</p>
+    <p><strong>Updated At:</strong> {{ itemUpdatedTimestamp | date:'medium' }}</p>
 
     <!-- Action Buttons -->
     <div class="action-buttons">
@@ -120,9 +149,13 @@
 <!-- Loading indicator (optional) -->
 <div *ngIf="loading">Loading...</div>
 
+<div class="api-buttons">
+    <button (click)="fetchAllItemData()">Fetch All Items</button>
+</div>
 
-<button (click)="fetchAllItemData()">Fetch All Items</button>
-<button (click)="fetchTopItemsByAmountOrdered()">Fetch Top Items</button>
+<div class="api-buttons">
+    <button (click)="fetchTopItemsByAmountOrdered()">Fetch Top Items</button>
+</div>
 
 <!-- Loading indicator -->
 <div *ngIf="loading">Loading...</div>
@@ -143,7 +176,8 @@
     <div *ngFor="let item of items" class="row">
         <div class="action-buttons">
             <button (click)="deleteSingleItemData(item.id)">Delete</button>
-            <button (click)="loadItemVariables(item.id, item.id, item.name, item.price)">Load</button>
+            <button
+                (click)="loadItemVariables(item.id, item.id, item.name, item.price, item.createdAt, item.updatedAt)">Load</button>
         </div>
 
         <div class="row-item">{{ item.id || item.item.id }}</div>
@@ -152,6 +186,104 @@
         <div class="row-item">{{ item.totalQuantity }}</div>
         <div class="row-item">{{ item.createdAt | date:'medium' }}</div>
         <div class="row-item">{{ item.updatedAt | date:'medium' }}</div>
+    </div>
+</div>
+
+<!-- Template for when no data is found -->
+<ng-template #noData>
+    <div>No items found.</div>
+</ng-template>
+
+<!---------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<h1>Purchases List</h1>
+<!---------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+<!-- Input for Client ID -->
+<div class="input-container">
+    <div class="input-field">
+        <label for="purchaseId">Enter purchase ID:</label>
+        <input type="number" [(ngModel)]="purchaseId" id="purchaseId" placeholder="Enter purchase ID" />
+    </div>
+</div>
+
+<div class="api-buttons">
+    <button (click)="fetchSinglePurchaseData(purchaseId);">Fetch Single purchase</button>
+</div>
+
+<div class="input-container">
+    <div class="input-field" *ngIf="purchase">
+        <label for="clientId">Edit Client Id:</label>
+        <input type="number" [(ngModel)]="purchase.clientId" id="clientId" />
+    </div>
+
+    <div class="input-field" *ngIf="purchase">
+        <label for="itemId">Edit Item Id:</label>
+        <input type="number" [(ngModel)]="purchase.itemId" id="itemId" />
+    </div>
+
+    <div class="input-field" *ngIf="purchase">
+        <label for="quantity">Edit Item Quantity:</label>
+        <input type="number" [(ngModel)]="purchase.quantity" id="quantity" />
+    </div>
+</div>
+
+<div class="api-buttons">
+    <button (click)="createSinglePurchaseData()">Create purchase</button>
+</div>
+
+<!-- Display the purchase data when fetched -->
+<div *ngIf="purchase" class="container">
+    <h2>Purchase Details</h2>
+    <p><strong>ID Purchase:</strong> {{ purchase.id }}</p>
+    <p><strong>ID Client:</strong> {{ purchase.clientId }}</p>
+    <p><strong>ID Item:</strong> {{ purchase.itemId }}</p>
+    <p><strong>Item Quantity:</strong> {{ purchase.quantity }}</p>
+    <p><strong>Created At:</strong> {{ purchaseCreatedTimestamp | date:'medium' }}</p>
+    <p><strong>Updated At:</strong> {{ purchaseUpdatedTimestamp | date:'medium' }}</p>
+
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+        <button (click)="editSinglePurchaseData(purchaseId)">Save</button>
+        <button (click)="deleteSinglePurchaseData(purchaseId)">Delete</button>
+    </div>
+</div>
+
+<!-- Loading indicator (optional) -->
+<div *ngIf="loading">Loading...</div>
+
+<div class="api-buttons">
+    <button (click)="fetchAllPurchaseData()">Fetch All Purchases</button>
+</div>
+
+<!-- Loading indicator -->
+<div *ngIf="loading">Loading...</div>
+
+<!-- Table Container -->
+<div *ngIf="purchases && purchases.length > 0; else noData" class="table">
+    <div class="header">
+        <div class="header-item">Actions</div>
+        <div class="header-item">ID Purchase</div>
+        <div class="header-item">ID Client</div>
+        <div class="header-item">ID Item</div>
+        <div class="header-item">Quantity</div>
+        <div class="header-item">Created At</div>
+        <div class="header-item">Updated At</div>
+    </div>
+
+    <!-- Table Rows: Each client is displayed as a row -->
+    <div *ngFor="let purchase of purchases" class="row">
+        <div class="action-buttons">
+            <button (click)="deleteSinglePurchaseData(purchase.id)">Delete</button>
+            <button (click)="
+                loadPurchaseVariables(purchase.id, purchase.id, purchase.quantity, purchase.clientId, purchase.clientId, purchase.itemId, purchase.itemId, purchase.createdAt, purchase.updatedAt);
+                ">Load</button>
+        </div>
+        <div class="row-item">{{ purchase.id || purchase.purchase.id }}</div>
+        <div class="row-item">{{ purchase.clientId || purchase.purchase.clientId }}</div>
+        <div class="row-item">{{ purchase.itemId || purchase.purchase.itemId }}</div>
+        <div class="row-item">{{ purchase.quantity }}</div>
+        <div class="row-item">{{ purchase.createdAt | date:'medium' }}</div>
+        <div class="row-item">{{ purchase.updatedAt | date:'medium' }}</div>
     </div>
 </div>
 

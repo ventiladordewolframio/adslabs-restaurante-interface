@@ -19,10 +19,21 @@ export class HomeComponent {
   clients: any[] = [];
   client: any = null;
   clientId: number = 1;
+  clientCreatedTimestamp: any = null;
+  clientUpdatedTimestamp: any = null;
 
   items: any[] = [];
   item: any = null;
   itemId: number = 1;
+  itemCreatedTimestamp: any = null;
+  itemUpdatedTimestamp: any = null;
+
+  purchases: any[] = [];
+  purchase: any = null;
+  purchaseId: number = 1;
+  quantity: number = 1;
+  purchaseCreatedTimestamp: any = null;
+  purchaseUpdatedTimestamp: any = null;
 
   loading = false;
 
@@ -99,6 +110,8 @@ export class HomeComponent {
         console.log('API Response:', response);
         if (response) {
           this.client = response.client;
+          this.clientCreatedTimestamp = this.client.createdAt
+          this.clientUpdatedTimestamp = this.client.updatedAt
         } else {
           console.warn('No valid client data found in response.');
           this.client = [];
@@ -188,18 +201,34 @@ export class HomeComponent {
     );
   }
 
-  loadClientVariables(clientid: number, id: number, name: string, cpf: string) {
+  loadClientVariables(clientid: number, id: number, name: string, cpf: string, createdAt: string, updatedAt: string) {
     this.clientId = clientid
     this.client.id = id
     this.client.name = name
     this.client.cpf = cpf
+    this.clientCreatedTimestamp = createdAt
+    this.clientUpdatedTimestamp = updatedAt
   }
 
-  loadItemVariables(itemid: number, id: number, name: string, price: string) {
+  loadItemVariables(itemid: number, id: number, name: string, price: string, createdAt: string, updatedAt: string) {
     this.itemId = itemid
     this.item.id = id
     this.item.name = name
     this.item.price = price
+    this.itemCreatedTimestamp = createdAt
+    this.itemUpdatedTimestamp = updatedAt
+  }
+
+  loadPurchaseVariables(purchaseid: number, id: number, quantity: number, clientId: number, clientid: number, itemId: number, itemid: number, createdAt: string, updatedAt: string) {
+    this.purchaseId = purchaseid
+    this.purchase.id = id
+    this.quantity = quantity
+    this.clientId = clientId
+    this.client.id = clientid
+    this.itemId = itemId
+    this.item.id = itemid
+    this.purchaseCreatedTimestamp = createdAt
+    this.purchaseUpdatedTimestamp = updatedAt
   }
 
   test(id: number) {
@@ -236,6 +265,8 @@ export class HomeComponent {
         console.log('API Response:', response);
         if (response) {
           this.item = response.item;
+          this.itemCreatedTimestamp = this.item.createdAt
+          this.itemUpdatedTimestamp = this.item.updatedAt
         } else {
           console.warn('No valid item data found in response.');
           this.item = [];
@@ -278,7 +309,7 @@ export class HomeComponent {
       name: this.item.name,
       price: parseInt(this.item.price, 10)
     };
-    console.log(newClientData.name, newClientData.price)
+
     this.apiService.putSingleItemData(id, newClientData).subscribe(
       (response: any) => {
         console.log('API Response:', response);
@@ -303,7 +334,7 @@ export class HomeComponent {
 
     const newClientData = {
       name: this.item.name,
-      price: parseInt(this.item.price)
+      price: parseInt(this.item.price, 10)
     };
 
     this.apiService.postSingleItemData(newClientData).subscribe(
@@ -337,6 +368,129 @@ export class HomeComponent {
           this.items = [];
         }
         console.log('API Response ITEMS:', this.items)
+        this.loading = false;
+      },
+      (error) => {
+        console.error('Error fetching data:', error);
+        this.loading = false;
+      }
+    );
+  }
+
+  //* PURCHASE
+
+  fetchAllPurchaseData() {
+    this.loading = true;
+    this.apiService.getAllPurchaseData().subscribe(
+      (response: any) => {
+        console.log('API Response:', response);
+        if (response && response.dados && Array.isArray(response.dados)) {
+          this.purchases = response.dados;
+        } else {
+          console.warn('No valid purchase data found in response.');
+          this.purchases = [];
+        }
+        console.log('API Response PURCHASES:', this.purchases)
+        this.loading = false;
+      },
+      (error) => {
+        console.error('Error fetching data:', error);
+        this.loading = false;
+      }
+    );
+  }
+
+  fetchSinglePurchaseData(id: number) {
+    this.loading = true;
+    this.apiService.getSinglePurchaseData(id).subscribe(
+      (response: any) => {
+        console.log('API Response:', response);
+        if (response) {
+          this.purchase = response.purchase;
+          this.purchaseCreatedTimestamp = this.purchase.createdAt
+          this.purchaseUpdatedTimestamp = this.purchase.updatedAt
+        } else {
+          console.warn('No valid purchase data found in response.');
+          this.purchase = [];
+        }
+        console.log('API Response PURCHASE:', this.purchase)
+        this.loading = false;
+      },
+      (error) => {
+        console.error('Error fetching data:', error);
+        this.loading = false;
+      }
+    );
+  }
+
+  deleteSinglePurchaseData(id: number) {
+    this.loading = true;
+    this.apiService.delSinglePurchaseData(id).subscribe(
+      (response: any) => {
+        console.log('API Response:', response);
+        if (response) {
+          this.purchase = response.purchase;
+        } else {
+          console.warn('No valid purchase data found in response.');
+          this.purchase = [];
+        }
+        console.log('API Response PURCHASE:', this.purchase)
+        this.loading = false;
+      },
+      (error) => {
+        console.error('Error fetching data:', error);
+        this.loading = false;
+      }
+    );
+  }
+
+  editSinglePurchaseData(id: number) {
+    this.loading = true;
+
+    const newPurchaseData = {
+      clientId: this.clientId,
+      itemId: this.itemId,
+      quantity: this.quantity
+    };
+
+    this.apiService.putSinglePurchaseData(id, newPurchaseData).subscribe(
+      (response: any) => {
+        console.log('API Response:', response);
+        if (response) {
+          this.purchase = response.purchase;
+        } else {
+          console.warn('No valid purchase data found in response.');
+          this.purchase = [];
+        }
+        console.log('API Response PURCHASE:', this.purchase);
+        this.loading = false;
+      },
+      (error) => {
+        console.error('Error fetching data:', error);
+        this.loading = false;
+      }
+    );
+  }
+
+  createSinglePurchaseData() {
+    this.loading = true;
+
+    const newPurchaseData = {
+      clientId: this.clientId,
+      itemId: this.itemId,
+      quantity: this.quantity
+    };
+
+    this.apiService.postSinglePurchaseData(newPurchaseData).subscribe(
+      (response: any) => {
+        console.log('API Response:', response);
+        if (response && response.purchase) {
+          this.purchase = response.purchase;
+        } else {
+          console.warn('No valid purchase data found in response.');
+          this.purchase = [];
+        }
+        console.log('API Response PURCHASE:', this.purchase);
         this.loading = false;
       },
       (error) => {
