@@ -1,0 +1,7 @@
+services:
+  angular-app:
+    image: pedroavenir/adslabs-restaurante-interface:latest
+    ports:
+      - "8080:80"
+    container_name: adslabs-restaurante-interface
+    restart: unless-stopped
