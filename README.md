@@ -1,5 +1,14 @@
 # AdslabsRestauranteInterface
 
+## Comentário
+
+aqui fica o front end feito em angular, o back end fica em [adslabs-restaurante](https://github.com/ventiladordewolframio/adslabs-restaurante)
+
+a imagem do docker hub para a interface fica em [pedroavenir/adslabs-restaurante-interface](https://hub.docker.com/r/pedroavenir/adslabs-restaurante-interface)
+e a imagem do back end fica em [pedroavenir/adslabs-restaurante](https://hub.docker.com/r/pedroavenir/adslabs-restaurante-interface)
+
+---
+
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.15.
 
 ## Development server
