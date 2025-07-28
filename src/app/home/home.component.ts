@@ -219,14 +219,12 @@ export class HomeComponent {
     this.itemUpdatedTimestamp = updatedAt
   }
 
-  loadPurchaseVariables(purchaseid: number, id: number, quantity: number, clientId: number, clientid: number, itemId: number, itemid: number, createdAt: string, updatedAt: string) {
+  loadPurchaseVariables(purchaseid: number, id: number, quantity: number, clientId: number, itemId: number, createdAt: string, updatedAt: string) {
     this.purchaseId = purchaseid
     this.purchase.id = id
-    this.quantity = quantity
-    this.clientId = clientId
-    this.client.id = clientid
-    this.itemId = itemId
-    this.item.id = itemid
+    this.purchase.quantity = quantity
+    this.purchase.clientId = clientId
+    this.purchase.itemId = itemId
     this.purchaseCreatedTimestamp = createdAt
     this.purchaseUpdatedTimestamp = updatedAt
   }
@@ -448,9 +446,9 @@ export class HomeComponent {
     this.loading = true;
 
     const newPurchaseData = {
-      clientId: this.clientId,
-      itemId: this.itemId,
-      quantity: this.quantity
+      clientId: this.purchase.clientId,
+      itemId: this.purchase.itemId,
+      quantity: this.purchase.quantity
     };
 
     this.apiService.putSinglePurchaseData(id, newPurchaseData).subscribe(
@@ -476,9 +474,9 @@ export class HomeComponent {
     this.loading = true;
 
     const newPurchaseData = {
-      clientId: this.clientId,
-      itemId: this.itemId,
-      quantity: this.quantity
+      clientId: this.purchase.clientId,
+      itemId: this.purchase.itemId,
+      quantity: this.purchase.quantity
     };
 
     this.apiService.postSinglePurchaseData(newPurchaseData).subscribe(

@@ -233,3 +233,27 @@
     outline: 2px solid #5fd6a3;
     outline-offset: 2px;
 }
+
+/* SECCTION TITLE */
+
+.section-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #3BA170;
+    margin: 40px 0 20px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #3BA170;
+    display: inline-block;
+    width: 100%;
+    background: linear-gradient(to right, #27283B, #1d1e2e);
+    padding-top: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    letter-spacing: 1px;
+}
+
+.section-title:hover {
+    color: #5fd6a3;
+    border-color: #5fd6a3;
+    cursor: default;
+}

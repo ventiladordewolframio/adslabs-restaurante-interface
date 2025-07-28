@@ -1,4 +1,4 @@
-<h1>Clients List</h1>
+<h1 class="section-title">Clients List</h1>
 
 <!-- Input for Client ID -->
 <div class="input-container">
@@ -93,13 +93,8 @@
     </div>
 </div>
 
-<!-- Template for when no data is found -->
-<ng-template #noData>
-    <div>No clients found.</div>
-</ng-template>
-
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------->
-<h1>Items List</h1>
+<h1 class="section-title">Items List</h1>
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
 <!-- Input for Client ID -->
@@ -189,13 +184,8 @@
     </div>
 </div>
 
-<!-- Template for when no data is found -->
-<ng-template #noData>
-    <div>No items found.</div>
-</ng-template>
-
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------->
-<h1>Purchases List</h1>
+<h1 class="section-title">Purchases List</h1>
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
 <!-- Input for Client ID -->
@@ -275,7 +265,7 @@
         <div class="action-buttons">
             <button (click)="deleteSinglePurchaseData(purchase.id)">Delete</button>
             <button (click)="
-                loadPurchaseVariables(purchase.id, purchase.id, purchase.quantity, purchase.clientId, purchase.clientId, purchase.itemId, purchase.itemId, purchase.createdAt, purchase.updatedAt);
+                loadPurchaseVariables(purchase.id, purchase.id, purchase.quantity, purchase.clientId, purchase.itemId, purchase.createdAt, purchase.updatedAt);
                 ">Load</button>
         </div>
         <div class="row-item">{{ purchase.id || purchase.purchase.id }}</div>
@@ -289,5 +279,5 @@
 
 <!-- Template for when no data is found -->
 <ng-template #noData>
-    <div>No items found.</div>
+    <div>Click to Fetch data.</div>
 </ng-template>
